@@ -1,0 +1,51 @@
+pipeline {
+agent any
+tools {nodejs "node"}
+environment { 
+    VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
+}
+//heroku staging and login 
+stages {
+    stage('Set up Heroku'){
+        steps{
+            bat "npm install -g heroku"
+            withCredentials([usernamePassword(credentialsId:'kelvinmbote',usernameVariable:'kelvinmbote',passwordVariable:'kevO9277')]){
+                    bat '(echo "${env.USR}" echo "${env.PWD}") | heroku login -i'
+            }
+        }
+    }
+    //git repository
+    stage('Cloning Git') {
+        steps {
+            git 'https://github.com/kjmbote/gallery.git'
+        }
+    }
+    stage('Install Packages') {
+        steps {
+            sh 'npm install'
+        }
+    }
+    stage('Test'){
+        steps{
+            sh 'npm test'
+        }
+    }
+    //deployment to heroku from git
+
+    stage('Deploy to Heroku') {
+            steps {
+                script {
+                    // Log in to Heroku
+                    sh 'heroku login --kelvinMbote --pass: HRKU-47010217-68b9-40c5-b911-65c79e75f786'
+                    
+                    // Set the Heroku API key for authentication
+                    sh "heroku auth:token=$HHRKU-47010217-68b9-40c5-b911-65c79e75f786"
+                    
+                    // Add Heroku remote
+                    sh 'heroku git:remote https://week2-2d843a3ee266.herokuapp.com/'
+                    
+                    // Push to Heroku
+                    sh 'git push heroku master'
+                }
+            }
+        }
