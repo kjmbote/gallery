@@ -1,21 +1,35 @@
 {
   "name": "dark-room",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "kelvin ip",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^3.1.3",
-    "express": "^4.17.1",
-    "mongodb": "^3.5.8",
+    "express": "^4.19.2",
+    "mongodb": "^3.7.4",
     "mongoose": "^5.9.16",
-    "multer": "^1.4.2",
+    "multer": "^1.4.4",
+    "node": "^22.1.0",
+    "semver": "^7.6.1",
     "uuid": "^8.1.0"
-  }
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjmbote/gallery.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kjmbote/gallery/issues"
+  },
+  "homepage": "https://github.com/kjmbote/gallery#readme",
+  "description": ""
 }
